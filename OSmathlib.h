@@ -1,24 +1,32 @@
 /*
- * Author: Ryxus, Founder of Specialized System Management Software (SSMS).
- * Copyright © [2024] Specialized System Management Software (SSMS)
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
+ *  [************* OPERATING SYSTEM MATHEMATICAL LIBRARY ****************]
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
+ *
+ *
+ |--------------------------------------------------------------------------------
+ | Author: Ryxus, Founder of Specialized System Management Software (SSMS).      |
+ | Copyright © [2024] Specialized System Management Software (SSMS)              |
+ |                                                                               |
+ | Permission is hereby granted, free of charge, to any person obtaining a copy  |
+ | of this software and associated documentation files (the "Software"), to deal |
+ | in the Software without restriction, including without limitation the rights  |
+ | to use, copy, modify, merge, publish, distribute, sublicense, and/or sell     |
+ | copies of the Software, and to permit persons to whom the Software is         |
+ | furnished to do so, subject to the following conditions:                      |
+ |                                                                               |
+ | The above copyright notice and this permission notice shall be included in    |
+ | all copies or substantial portions of the Software.                           |
+ |                                                                               |
+ | THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR    |
+ | IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,      |
+ | FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE   |
+ | AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER        |
+ | LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, |
+ | OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN     |
+ | THE SOFTWARE.                                                                 |
+ ---------------------------------------------------------------------------------
  */
 
 #include <stdio.h>
@@ -57,6 +65,7 @@ bool bitwise_matrix_addition(int matrix_A[ROWS][COLS], int matrix_B[ROWS][COLS],
 void set_bit(uint8_t *buffer, size_t index);
 void clear_bit(uint8_t *buffer, size_t index);
 void toggle_bit(uint8_t *buffer, size_t index);
+
 
 char* add_binary(const char* bin1, const char* bin2) {
 	int len1 = strlen(bin1);
@@ -105,6 +114,7 @@ char* add_binary(const char* bin1, const char* bin2) {
 
 	return result;
 }
+
 
 char* subtract_binary(const char* bin1, const char* bin2) {
 	int len1 = strlen(bin1);
@@ -273,6 +283,14 @@ char* divide_bin(const char* dividend, const char* divisor) {
 	return quotient;
 }
 
+void shift_left(char *binary) {
+	int len = strlen(binary);
+	for (int i = 0; i < len - 1; i++) {
+		binary[i] = binary[i + 1];
+	}
+	binary[len - 1] = '0';
+}
+
 char* modulus_bin(const char* dividend, const char* divisor) {
 	int len_dividend = strlen(dividend);
 	int len_divisor = strlen(divisor);
@@ -308,7 +326,7 @@ char* modulus_bin(const char* dividend, const char* divisor) {
 
 		// Try subtracting the divisor from the shifted remainder
 		while (strcmp(remainder, divisor) >= 0) {
-			char* temp = subtract_bin(remainder, divisor);
+			char* temp = subtract_binary(remainder, divisor);
 			free(remainder);
 			remainder = temp;
 		}
@@ -467,6 +485,7 @@ int hex_to_decimal(char hex[]) {
 			printf("Invalid hexadecimal number!\n");
 			return -1;
 		}
+
 		decimal += digitValue * pow(16, strlen(hex) - 1 - i);
 	}
 
@@ -493,6 +512,7 @@ bool bitwise_matrix_addition(int matrix_A[ROWS][COLS], int matrix_B[ROWS][COLS],
 			if (sum < matrix_A[i][j] || sum < matrix_B[i][j]) {
 				return false;
 			}
+			
 			resultant_matrix[i][j] = sum;
 		}
 	}
